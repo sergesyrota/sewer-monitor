@@ -12,7 +12,7 @@
 #include <cppunit/TestSuite.h>
 #include <cppunit/TestCase.h>
 
-#include "../LaserSensing.h"
+#include "../Arduino/LaserSensing.h"
 
 using namespace std;
 

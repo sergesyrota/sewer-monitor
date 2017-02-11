@@ -12,9 +12,9 @@ DEBUG = -g
 LFLAGS = -Wall $(DEBUG)
 CFLAGS = -Wall -c -std=c++0x
 
-SOURCES = TestRunner.cpp ../LaserSensing.cpp
+SOURCES = TestRunner.cpp ../Arduino/LaserSensing.cpp
 
-HEADERS = ../LaserSensing.h \
+HEADERS = ../Arduino/LaserSensing.h \
 	TestLaserSensing.h
 
 OBJ = $(SOURCES:.cpp=.o)
