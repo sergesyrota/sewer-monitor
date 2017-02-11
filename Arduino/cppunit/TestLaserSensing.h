@@ -42,6 +42,10 @@ public:
 	/// Setup method
 	void setUp() {
 		testCounter = new LaserSensing(5000,1);
+		// zero-out all data
+		for (int i = 0; i < LASER_SENSING_NUMBER_READINGS; i++) {
+			testCounter->reading(0);
+		}
 	}
 
 	/// Teardown method
@@ -59,7 +63,7 @@ protected:
 	void testOneReading() {
 		addReadings(1, (int[]){500});
 		CPPUNIT_ASSERT_EQUAL( 500, testCounter->getValue() );
-		CPPUNIT_ASSERT_EQUAL( 10, testCounter->percentValid() );
+		CPPUNIT_ASSERT_EQUAL( (int)100/LASER_SENSING_NUMBER_READINGS, testCounter->percentValid() );
 	}
 
 	void testAllInvalid() {
@@ -71,13 +75,13 @@ protected:
 	void testMix() {
 		addReadings(10, (int[]){-1,-10,300,8096,300,300,20000,300,300});
 		CPPUNIT_ASSERT_EQUAL( 300, testCounter->getValue() );
-		CPPUNIT_ASSERT_EQUAL( 50, testCounter->percentValid() );
+		CPPUNIT_ASSERT_EQUAL( (int)5*100/LASER_SENSING_NUMBER_READINGS, testCounter->percentValid() );
 	}
 
 	void testRandomReadings() {
 		addReadings(10, (int[]){526,528,536,538,524,539,521,539,522,549});
 		CPPUNIT_ASSERT_EQUAL( 532, testCounter->getValue() );
-		CPPUNIT_ASSERT_EQUAL( 100, testCounter->percentValid() );
+		CPPUNIT_ASSERT_EQUAL( (int)10*100/LASER_SENSING_NUMBER_READINGS, testCounter->percentValid() );
 	}
 
 	void testSameReadings() {
@@ -92,7 +96,7 @@ protected:
 		testCounter->reading(500);
 		testCounter->reading(500);
 		CPPUNIT_ASSERT_EQUAL( 500, testCounter->getValue() );
-		CPPUNIT_ASSERT_EQUAL( 100, testCounter->percentValid() );
+		CPPUNIT_ASSERT_EQUAL( (int)10*100/LASER_SENSING_NUMBER_READINGS, testCounter->percentValid() );
 	}
 
 	void testRollover() {

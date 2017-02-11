@@ -1,8 +1,7 @@
-
 #ifndef LaserSensing_h
 #define LaserSensing_h
 
-#define LASER_SENSING_NUMBER_READINGS 10
+#define LASER_SENSING_NUMBER_READINGS 50
 
 class LaserSensing
 {
