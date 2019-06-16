@@ -88,6 +88,7 @@ void saveConfig()
 void loop()
 {
   if (net.messageReceived()) {
+    digitalWrite(13, HIGH); delay(200); digitalWrite(13, LOW);
     char buf[100];
     if (net.assertCommand("getDistance")) {
       net.sendResponse(itoa(laser.getValue(), buf, 10));
@@ -95,6 +96,8 @@ void loop()
       net.sendResponse(itoa(laser.percentValid(), buf, 10));
     } else if (net.assertCommandStarts("set", buf)) {
       processSetCommands();
+    } else if (net.assertCommand("getRawLaser")) {
+      net.sendResponse(itoa(sensor.readRangeSingleMillimeters(), buf, 10));
     } else {
       net.sendResponse("Unrecognized command");
     }
